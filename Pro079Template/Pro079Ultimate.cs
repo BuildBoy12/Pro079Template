@@ -1,12 +1,9 @@
-﻿using Smod2.Events;
+﻿using Exiled.API.Features;
 using Pro079Core.API;
-using Smod2.EventHandlers;
-using Smod2.API;
-using Smod2;
 
 namespace Pro079Template 
 {
-	class Pro079Ultimate : IEventHandlerWaitingForPlayers, IUltimate079
+	class Pro079Ultimate : IUltimate079
 	{
 		private bool doorsBroke = false;
 		private readonly Pro079UltimatePlugin plugin; 
@@ -18,7 +15,7 @@ namespace Pro079Template
 		// This is an example of why Config Options are not needed, but I do encourage you to do configs.
 		public string Name => "breakdoors";
 
-		public string Info => plugin.info;
+		public string Info => plugin.Config.Translations.Info;
 
 		// Properties in C# work basically like functions, so you can have 0 cooldowns if certain conditions are met.
 		public int Cooldown
@@ -27,28 +24,28 @@ namespace Pro079Template
 			{
 				if (doorsBroke)
 				{
-					plugin.Info("Dumb SCP-079 tried to use the breakdoors ultimate twice.");
+					Log.Info("Dumb SCP-079 tried to use the breakdoors ultimate twice.");
 					return 0;
 				}
-				else return plugin.cooldown;
+				else return plugin.Config.Cooldown;
 			}
 		}
 
 		// The => basically works like a one line function, that's my secret :smug:
-		public int Cost => doorsBroke ? 0 : plugin.cost;
+		public int Cost => doorsBroke ? 0 : plugin.Config.Cost;
 
 		public string TriggerUltimate(string[] args, Player Player)
 		{
-			foreach(Door door in PluginManager.Manager.Server.Map.GetDoors())
+			foreach(Door door in Map.Doors)
 			{
 				// I didn't even test this, but probably some Destroyed = true give some exceptions
-				try { door.Destroyed = true; } catch { }
+				try { door.Networkdestroyed = true; } catch { }
 			}
-			return plugin.yeetus;
+			return plugin.Config.Translations.Yeetus;
 		}
 
 		// You need to reset the variables you will use, so do it in the event WaitingForPlayers
-		public void OnWaitingForPlayers(WaitingForPlayersEvent ev)
+		public void OnWaitingForPlayers()
 		{
 			doorsBroke = false;
 		}
