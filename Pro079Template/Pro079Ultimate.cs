@@ -27,12 +27,12 @@ namespace Pro079Template
 					Log.Info("Dumb SCP-079 tried to use the breakdoors ultimate twice.");
 					return 0;
 				}
-				else return plugin.Config.Cooldown;
+				else return plugin.Config.UltCooldown;
 			}
 		}
 
 		// The => basically works like a one line function, that's my secret :smug:
-		public int Cost => doorsBroke ? 0 : plugin.Config.Cost;
+		public int Cost => doorsBroke ? 0 : plugin.Config.UltCost;
 
 		public string TriggerUltimate(string[] args, Player Player)
 		{
