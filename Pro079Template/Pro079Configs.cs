@@ -2,7 +2,7 @@
 
 namespace Pro079Template
 {
-    public sealed class Pro079PluginConfig : IConfig
+    public sealed class Config : IConfig
     {
         public bool IsEnabled { get; set; } = true;
 
@@ -11,8 +11,13 @@ namespace Pro079Template
 		public int Cost { get; set; } = 50;
 		public int Level { get; set; } = 2;
 
+		//Ultimate Configs
+		public int UltCost { get; set; } = 50;
+		public int UltCooldown { get; set; } = 60;
+
 		// Language Options
-		public Pro079PluginTranslations Translations { get; set; } = new Pro079PluginTranslations();		
+		public Pro079PluginTranslations Translations { get; set; } = new Pro079PluginTranslations();
+		public Pro079UltimateTranslations UltimateTranslations { get; set; } = new Pro079UltimateTranslations();
 	}
 
 	public sealed class Pro079PluginTranslations
@@ -30,17 +35,6 @@ namespace Pro079Template
 		public string TemplateUsageError { get; set; } = "Usage: .079 gate (a/b) - Cost: $min AP";
 		public string TemplateReady { get; set; } = "<b><color=\"green\">Gate command ready</color></b>";
 	}
-
-    public sealed class Pro079UltimateConfig : IConfig
-    {
-        public bool IsEnabled { get; set; } = true;
-
-		// Recommended stuff you should have, but not needed.
-		public int Cost { get; set; } = 50;
-		public int Cooldown { get; set; } = 60;
-
-		public Pro079UltimateTranslations Translations = new Pro079UltimateTranslations();
-    }
 
 	public sealed class Pro079UltimateTranslations
     {

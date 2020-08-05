@@ -6,8 +6,8 @@ namespace Pro079Template
 	class Pro079Ultimate : IUltimate079
 	{
 		private bool doorsBroke = false;
-		private readonly Pro079UltimatePlugin plugin; 
-		public Pro079Ultimate(Pro079UltimatePlugin plugin)
+		private readonly Pro079Plugin plugin; 
+		public Pro079Ultimate(Pro079Plugin plugin)
 		{
 			this.plugin = plugin;
 		}
@@ -15,7 +15,7 @@ namespace Pro079Template
 		// This is an example of why Config Options are not needed, but I do encourage you to do configs.
 		public string Name => "breakdoors";
 
-		public string Info => plugin.Config.Translations.Info;
+		public string Info => plugin.Config.UltimateTranslations.Info;
 
 		// Properties in C# work basically like functions, so you can have 0 cooldowns if certain conditions are met.
 		public int Cooldown
@@ -41,7 +41,7 @@ namespace Pro079Template
 				// I didn't even test this, but probably some Destroyed = true give some exceptions
 				try { door.Networkdestroyed = true; } catch { }
 			}
-			return plugin.Config.Translations.Yeetus;
+			return plugin.Config.UltimateTranslations.Yeetus;
 		}
 
 		// You need to reset the variables you will use, so do it in the event WaitingForPlayers
